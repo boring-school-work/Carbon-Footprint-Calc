@@ -7,6 +7,7 @@
 public abstract class Vehicle {
     private String name; // the name of the vehicle
     private boolean isPublic; // whether the is public or privately owned
+    private String altName; // the alternative name of the vehicle
 
     /**
      * Vehicle constructor
@@ -46,9 +47,29 @@ public abstract class Vehicle {
      * @return the name of the vehicle
      *
      */
-    public String getNmae() {
+    public String getName() {
         return this.name;
 
     }
+
+    /**
+     * Sets the alternative name of the vehicle
+     *
+     * @param altName the alternative name of the vehicle
+     *
+     */
+    public void setAltName(String altName) {
+        this.altName = altName;
+    }
+
+    /**
+     * Gets the alternative name of the vehicle
+     *
+     */
+    public String getAltName() {
+        return this.altName;
+    }
+
+    public abstract double getEmissionsFactor();
 
 }
