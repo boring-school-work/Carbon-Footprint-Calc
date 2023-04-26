@@ -8,7 +8,7 @@ import java.io.FileWriter;
  * Test1
  */
 public class Test3 {
-    public final static String FILE_PATH = "./test.txt";
+    public final static String FILE_PATH = "./some.txt";
 
     public static void main(String[] args) {
         Map<String, Map<String, Double>> usersData = new HashMap<>();
@@ -24,8 +24,14 @@ public class Test3 {
         try {
             File file = new File(FILE_PATH);
 
+            // create new file if it does not exist
+            if(!file.exists()) {
+                file.createNewFile();
+            }
+
             // create new BufferedWriter for the output file
-            bfWriter = new BufferedWriter(new FileWriter(file));
+            // add true to append the content to the file
+            bfWriter = new BufferedWriter(new FileWriter(file, true));
 
             for (Map.Entry<String, Map<String, Double>> keyEntry : usersData.entrySet()) {
 
