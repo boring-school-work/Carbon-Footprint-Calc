@@ -1,4 +1,4 @@
-import java.util.HashSet;
+import java.util.ArrayList;
 
 /**
  * Person class
@@ -8,7 +8,7 @@ import java.util.HashSet;
  */
 public class Person {
     private String name; // the name of the person
-    private HashSet<String> vehiclesOwned = new HashSet<>(); // the vehicles owned by the person
+    private ArrayList<Vehicle> vehiclesOwned = new ArrayList<>(); // the vehicles owned by the person
 
     /**
      * Person constructor
@@ -32,7 +32,7 @@ public class Person {
      * Gets the vehicles owned by the person.
      *
      */
-    public HashSet<String> getVehiclesOwned() {
+    public ArrayList<Vehicle> getVehiclesOwned() {
         return vehiclesOwned;
     }
 
@@ -40,7 +40,7 @@ public class Person {
      * Adds a vehicle to the vehicles owned by the person.
      *
      */
-    public void addVehicle(String vehicle) {
+    public void addVehicle(Vehicle vehicle) {
         vehiclesOwned.add(vehicle);
     }
 }
