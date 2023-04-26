@@ -4,7 +4,7 @@
  */
 public class Plane extends Vehicle {
     // QUESTION: Is the 50 the actual value?
-    public final double EMISSIONS_FACTOR = 50.0; // grams of CO2 per mile
+    private static final double EMISSIONS_FACTOR = 50.0; // grams of CO2 per mile
 
     /**
      * Plane constructor
@@ -15,4 +15,12 @@ public class Plane extends Vehicle {
     public Plane() {
         super("Plane");
     }
+
+    /**
+     * Gets the emissions factor of the plane.
+     */
+    public double getEmissionsFactor() {
+        return EMISSIONS_FACTOR;
+    }
+
 }
