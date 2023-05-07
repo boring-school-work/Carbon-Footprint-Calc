@@ -26,4 +26,7 @@
 ## Notes
 
 - Public buses generally run on diesel.
-- PRIVATE_EMISSIONS_FACTOR: "diesel" and "gasoline".
+
+## Disclaimer
+
+Actual figures are not used for carbon emission factors.
