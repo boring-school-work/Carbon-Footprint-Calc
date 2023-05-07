@@ -1,2 +1,0 @@
-John:car:0.5,bike:0.2,plane:0.34,
-Samuel:car:0.5,bike:0.2,plane:0.34,
