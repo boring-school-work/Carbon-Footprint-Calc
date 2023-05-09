@@ -15,11 +15,27 @@ import java.io.FileReader;
  *
  */
 public class LoadDB {
-    public final static String DATA_DIR = "./data/";
-    public final static String VEHICLE_FILE_PATH = DATA_DIR + "vehicleData.txt";
-    public final static String AUTH_FILE_PATH = DATA_DIR + "authData.txt";
+    public final static String DATA_DIR = "./.data/"; // directory to store program data
+    public final static String VEHICLE_FILE_PATH = DATA_DIR + "vehicleData.txt"; // location for vehicle data
+    public final static String AUTH_FILE_PATH = DATA_DIR + "authData.txt"; // location for authentication data
 
+    /*
+     * vehicleData
+     *
+     * Map<username, Map<actual name of vehicle, ArrayList<>() {
+     * add(name of vehicle);
+     * add(fuel type of vehicle);
+     * }>>
+     *
+     */
     public static Map<String, Map<String, ArrayList<String>>> vehicleData = new HashMap<>();
+
+    /*
+     * authData
+     *
+     * Map<username, password hash>
+     *
+     */
     public static Map<String, String> authData = new HashMap<>();
 
     /**
@@ -29,17 +45,11 @@ public class LoadDB {
      *
      */
     public static Map<String, Map<String, ArrayList<String>>> LoadVehicleData() {
-        Map<String, Map<String, ArrayList<String>>> vehicleData = new HashMap<>();
+        Map<String, Map<String, ArrayList<String>>> vehicleData = new HashMap<>(); // variable to store vehicle data
         BufferedReader bfReader = null;
 
         try {
-            File dir = new File(DATA_DIR);
             File file = new File(VEHICLE_FILE_PATH);
-
-            // create the data dir if it does not exist
-            if (!dir.exists()) {
-                dir.mkdir();
-            }
 
             // create a new file if it does not exist
             if (!file.exists()) {
@@ -50,32 +60,43 @@ public class LoadDB {
 
             String line = null;
 
-            // read line by line until the end of the file is reached
+            // read the file line by line until the end of the file is reached
             while ((line = bfReader.readLine()) != null) {
+                // the username is the string before the first occurence of ":"
                 String username = line.substring(0, line.indexOf(":"));
+
+                // the rest of the data are vehicle information
                 String vehiclesData = line.substring(line.indexOf(":") + 1);
 
-                // get the individual vehicles
+                // store the individual vehicles in an array
                 String[] parts = vehiclesData.split("&");
 
-                // insert data into HashMap is content is not empty
+                // insert data into HashMap if content is not empty
                 if (!username.isEmpty() && !vehiclesData.isEmpty()) {
-                    Map<String, ArrayList<String>> vehicleInfo = new HashMap<>();
+                    Map<String, ArrayList<String>> vehicleInfo = new HashMap<>(); // store vehicle's info
+
+                    /*
+                     * NOTE: vehicleInfo =
+                     * Map<actual name of vehicle, ArrayList<>() {
+                     * add(name of vehicle);
+                     * add(fuel type of vehicle);
+                     * }>>
+                     *
+                     */
 
                     for (String part : parts) {
                         vehicleInfo.put(part.split(":")[0],
                                 new ArrayList<>(Arrays.asList(part.split(":")[1].split(","))));
                     }
 
-                    vehicleData.put(username, vehicleInfo);
+                    vehicleData.put(username, vehicleInfo); // store individual records into the main record
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
-                // close BufferedReader
-                bfReader.close();
+                bfReader.close(); // close BufferedReader
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -84,6 +105,12 @@ public class LoadDB {
         return vehicleData;
     }
 
+    /**
+     * Loads the Authentication data
+     *
+     * @return authentication data
+     *
+     */
     public static Map<String, String> LoadAuthData() {
         Map<String, String> authData = new HashMap<>();
         BufferedReader bfReader = null;
@@ -100,7 +127,7 @@ public class LoadDB {
 
             String line = null;
 
-            // read line by line until the end of the file is reached
+            // read the file line by line until the end of the file is reached
             while ((line = bfReader.readLine()) != null) {
                 String username = line.substring(0, line.indexOf(":"));
                 String passwordHash = line.substring(line.indexOf(":") + 1);
@@ -110,8 +137,7 @@ public class LoadDB {
             e.printStackTrace();
         } finally {
             try {
-                // close BufferedReader
-                bfReader.close();
+                bfReader.close(); // close BufferedReader
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -120,7 +146,18 @@ public class LoadDB {
         return authData;
     }
 
-    public static void main(String args[]) {
+    /**
+     * Load Vehicle and authData
+     *
+     */
+    public static void main() {
+        File dir = new File(DATA_DIR);
+
+        // create the data directory if it does not exist
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+
         vehicleData = LoadVehicleData();
         authData = LoadAuthData();
     }
