@@ -215,7 +215,7 @@ public class App {
     }
 
     public static void main(String[] args) {
-        LoadDB.main(args); // load the database
+        LoadDB.main(); // load the database
 
         System.out.printf("%38s\n\n", "Welcome to Transportation Optimization System");
         Scanner getInput = new Scanner(System.in); // a scanner object to get user input
