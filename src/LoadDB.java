@@ -7,22 +7,41 @@ import java.io.File;
 import java.io.FileReader;
 
 /**
- * Load the database from the text files.
+ * Loads the database from the text files into variables
+ *
+ * @author David Saah
+ * @version 1.0
+ * @since 2023-04-26
+ *
  */
 public class LoadDB {
-    public final static String VEHICLE_FILE_PATH = "./data/vehicleData.txt";
-    public final static String AUTH_FILE_PATH = "./data/authData.txt";
+    public final static String DATA_DIR = "./data/";
+    public final static String VEHICLE_FILE_PATH = DATA_DIR + "vehicleData.txt";
+    public final static String AUTH_FILE_PATH = DATA_DIR + "authData.txt";
+
     public static Map<String, Map<String, ArrayList<String>>> vehicleData = new HashMap<>();
     public static Map<String, String> authData = new HashMap<>();
 
+    /**
+     * Loads the vehicle data
+     *
+     * @return the vehicle data
+     *
+     */
     public static Map<String, Map<String, ArrayList<String>>> LoadVehicleData() {
         Map<String, Map<String, ArrayList<String>>> vehicleData = new HashMap<>();
         BufferedReader bfReader = null;
 
         try {
+            File dir = new File(DATA_DIR);
             File file = new File(VEHICLE_FILE_PATH);
 
-            // create new file if it does not exist
+            // create the data dir if it does not exist
+            if (!dir.exists()) {
+                dir.mkdir();
+            }
+
+            // create a new file if it does not exist
             if (!file.exists()) {
                 file.createNewFile();
             }
