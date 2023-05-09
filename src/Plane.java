@@ -1,6 +1,10 @@
 /**
  * A class that defines the properties of a plane.
  *
+ * @author David Saah
+ * @version 1.0
+ * @since 2023-04-26
+ *
  */
 public class Plane extends Vehicle {
     private static final double PUBLIC_EMISSIONS_FACTOR = 50.0; // grams of CO2 per mile
@@ -9,7 +13,7 @@ public class Plane extends Vehicle {
     /**
      * Plane constructor
      *
-     * @param altName  the alternative name of the vehicle
+     * @param altName  the actual name of the Vehicle
      * @param isPublic whether the plane is public or privately owned
      *
      */
@@ -31,6 +35,8 @@ public class Plane extends Vehicle {
 
     /**
      * Gets the emissions factor of the plane.
+     *
+     * @return emissions factor of the plane
      *
      */
     public double getEmissionsFactor() {
