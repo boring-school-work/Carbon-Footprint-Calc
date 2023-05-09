@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,23 +7,42 @@ import java.util.Map;
  */
 public class Test {
 
+    public static Map<String, Map<String, ArrayList<String>>> vehicleData = new HashMap<>();
+
     public static void main(String[] args) {
-        String data = "John:Car:Ford,diesel&Plane:Jet leg,fuel&";
-        String username = data.substring(0, data.indexOf(":")).toLowerCase();
-        System.out.println("username: " + username);
-        String vehiclesData = data.substring(data.indexOf(":") + 1).toLowerCase();
+        vehicleData.put("key", new HashMap<String, ArrayList<String>>() {
+            {
+                put("key1", new ArrayList<String>() {
+                    {
+                        add("v1");
+                        add("v2");
+                    }
+                });
+                put("key2", new ArrayList<String>() {
+                    {
+                        add("v3");
+                        add("v4");
+                    }
+                });
+            }
+        });
 
-        String[] parts = vehiclesData.split("&");
+        vehicleData.get("key").put("key3", new ArrayList<String>() {
+            {
+                add("v1");
+                add("v2");
+            }
+        });
 
-        Map<String, ArrayList<String>> vehicleInfo = new HashMap<>();
+        vehicleData.get("key").put("key4", new ArrayList<String>() {
+            {
+                add("v3");
+                add("v4");
+            }
+        });
 
-        for (String part : parts) {
-            vehicleInfo.put(part.split(":")[0],
-                    new ArrayList<>(Arrays.asList(part.split(":")[1].split(","))));
-        }
-
-        for (String key : vehicleInfo.keySet()) {
-            System.out.println(key + ": " + vehicleInfo.get(key));
+        for (Map.Entry<String, Map<String, ArrayList<String>>> entry : vehicleData.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
         }
     }
 }
