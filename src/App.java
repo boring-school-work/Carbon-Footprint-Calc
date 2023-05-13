@@ -4,6 +4,11 @@ import java.util.Scanner;
 
 /**
  * Main class for the Transportation Optimization System.
+ * 
+ * @author David Saah
+ * @version 1.0
+ * @since 2023-04-26
+ * 
  */
 public class App {
 
@@ -13,8 +18,8 @@ public class App {
     private static double distance; // the distance to travel
     private static final Car PUBLIC_CAR = new Car("diesel", true); // a public car
     private static final Plane PUBLIC_PLANE = new Plane(true); // a public plane
-    private static boolean successState = false;
-    private static Person user;
+    private static boolean successState = false; // the success state of an operation
+    private static Person user; // the user object
 
     /**
      * Displays the results of transportation choice.
@@ -73,11 +78,10 @@ public class App {
                 : distance * PUBLIC_PLANE.getEmissionsFactor();
 
         privateTransportEmissions = distance * vehicle.getEmissionsFactor();
-
     }
 
     /**
-     * Set the distance to travel
+     * Sets the distance to travel
      *
      * @param getInput a scanner object to get user input
      *
@@ -135,16 +139,27 @@ public class App {
 
     }
 
+    /**
+     * Handles user sign up. It creates a new user object and adds it to the
+     * database.
+     * 
+     * @param getInput a scanner object to get user input
+     * 
+     * @return whether the user signed up successfully
+     * 
+     */
     public static boolean signUp(Scanner getInput) {
         String username;
         String password;
 
         System.out.println("\nCreating a new account ...");
 
+        // get the username
         do {
             System.out.print("Enter a username: ");
             username = getInput.nextLine();
 
+            // check if the username already exists
             if (LoadDB.authData.containsKey(username)) {
                 System.out.println("Username already exists, please try again.\n");
             } else {
@@ -154,6 +169,7 @@ public class App {
 
         user = new Person(username);
 
+        // get the password
         System.out.print("Enter a password: ");
         password = Authenticate.hash(getInput.nextLine().toCharArray());
 
@@ -168,16 +184,27 @@ public class App {
         return true;
     }
 
+    /**
+     * Handles user login. It loads the user's data from the database.
+     * 
+     * @param getInput a scanner object to get user input
+     * 
+     * @return whether the user logged in successfully
+     * 
+     */
     public static boolean logIn(Scanner getInput) {
         System.out.println("\nLogging in ...");
         System.out.print("Enter your username: ");
         String username = getInput.nextLine();
         String password, token;
 
+        // check if the username exists
         if (LoadDB.authData.containsKey(username)) {
             token = LoadDB.authData.get(username);
             System.out.print("Enter your password: ");
             password = getInput.nextLine();
+
+            // check if the password is correct
             if (Authenticate.authenticate(password.toCharArray(), token)) {
                 System.out.println("\nSuccessfully logged in.");
 
@@ -206,6 +233,15 @@ public class App {
 
     }
 
+    /**
+     * Handles user authentication choice
+     * 
+     * @param option   the user's choice
+     * @param getInput a scanner object to get user input
+     * 
+     * @return whether the user signed up or logged in successfully
+     * 
+     */
     public static boolean auth(String option, Scanner getInput) {
         if (option.equals("1")) {
             return signUp(getInput);
@@ -214,6 +250,12 @@ public class App {
         }
     }
 
+    /**
+     * The main method
+     * 
+     * @param args
+     * 
+     */
     public static void main(String[] args) {
         LoadDB.main(); // load the database
 
@@ -245,6 +287,7 @@ public class App {
         successState = false; // reset the success state
         option = ""; // reset the option
 
+        // show main menu
         while (true) {
             System.out.println();
 
