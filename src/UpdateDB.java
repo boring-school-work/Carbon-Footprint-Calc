@@ -5,14 +5,23 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * Test1
+ * Handles database updates
+ *
+ * @author David Saah
+ * @version 1.0
+ * @since 2023-04-26
+ *
  */
 public class UpdateDB {
 
+    /**
+     * Update the authentication database
+     *
+     * @param username the username
+     * @param password the password hash
+     *
+     */
     public static void UpdateAuthData(String username, String password) {
-        // add to authData to use as key in updating vehicle data for users
-        LoadDB.authData.put(username, password);
-
         BufferedWriter bfWriter = null;
 
         try {
@@ -44,6 +53,10 @@ public class UpdateDB {
 
     }
 
+    /**
+     * Update vehicle database
+     *
+     */
     public static void UpdateVehicleData() {
         BufferedWriter bfWriter = null;
 

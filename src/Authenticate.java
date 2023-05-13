@@ -9,6 +9,10 @@ import javax.crypto.spec.PBEKeySpec;
 
 /**
  * Authenticate a user by comparing the password token with the stored hash.
+ * 
+ * @author David Saah
+ * @version 1.0
+ * @since 2023-04-26
  *
  */
 public class Authenticate {
