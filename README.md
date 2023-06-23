@@ -16,12 +16,11 @@
   - A program that illustrates some aspect of climate science.
   - A program that models an approach to adapting to climate change.
 
-## Milestones
+## Criteria For Grading
 
-- [x] Draft of project title and introduction. (Due Apr 13)
-
-  - [x] Project title and introduction are very clearly related to the project theme.
-  - [x] Design document is well-written and logical, with no grammatical issues.
+- The project should apply the object-oriented programming paradigm and include at least four classes (and not more than ten classes) that interact with each other in a variety of ways. Most of your classes must have substantial/significant logic in at least one of the methods (i.e. not only getter/setter methods)
+- The project should involve the use of inheritance and/or interfaces.
+- The project should involve the use of some kind of Java collection
 
 ## Notes
 
