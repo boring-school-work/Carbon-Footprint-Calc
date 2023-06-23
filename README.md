@@ -26,6 +26,15 @@
 
 - Public buses generally run on diesel.
 
+## Project Features
+
+- User authentication with PBKDF2 for password hashing.
+- File database for customers.
+  - Users can add, retrieve and delete data.
+  - Stores user information and login info.
+- Measures carbon footprint from the chosen vehicle's fuel consumption.
+- Displays a report of carbon footprint.
+
 ## Disclaimer
 
 Actual figures are not used for carbon emission factors.
